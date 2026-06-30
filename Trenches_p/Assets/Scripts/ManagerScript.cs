@@ -9,8 +9,10 @@ public class ManagerScript : MonoBehaviour
 
     [SerializeField] Collider2D wall;
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] GameObject LossPanel;
 
     int score = 0;
+    bool stop = false;
     void Start()
     {
         if (instance == null)
@@ -29,9 +31,16 @@ public class ManagerScript : MonoBehaviour
         Debug.Log("Score: " + score);
         scoreText.text = score.ToString();
     }
+
+    public bool GetStop()
+    {
+        return stop;
+    }
     public void Lose()
     {
         Debug.Log("You Lose");
+        LossPanel.SetActive(true);
+        bool stop = true;
     }
 
     // Update is called once per frame

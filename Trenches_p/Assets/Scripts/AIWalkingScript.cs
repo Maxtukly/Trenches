@@ -15,7 +15,7 @@ public class AIWalkingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!hit)
+        if(!hit && !ManagerScript.instance.GetStop())
         transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
 }
