@@ -8,8 +8,11 @@ public class ManagerScript : MonoBehaviour
     public static ManagerScript instance;
 
     [SerializeField] Collider2D wall;
-    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI scoreTextinGame;
+    [SerializeField] TextMeshProUGUI scoreTextinMenu;
+    [SerializeField] TextMeshProUGUI highScoreText;
     [SerializeField] GameObject LossPanel;
+    [SerializeField] ScoreScriptableObject scoreScriptableObject;
 
     int score = 0;
     bool stop = false;
@@ -29,7 +32,7 @@ public class ManagerScript : MonoBehaviour
     {
         score++;
         Debug.Log("Score: " + score);
-        scoreText.text = score.ToString();
+        scoreTextinGame.text = score.ToString();
     }
 
     public bool GetStop()
@@ -40,6 +43,12 @@ public class ManagerScript : MonoBehaviour
     {
         Debug.Log("You Lose");
         LossPanel.SetActive(true);
+        if(scoreScriptableObject.killedinf < score)
+        {
+            scoreScriptableObject.killedinf = score;
+        }
+        highScoreText.text = scoreScriptableObject.killedinf.ToString();
+        scoreTextinMenu.text = score.ToString();
         bool stop = true;
     }
 
