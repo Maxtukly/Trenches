@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using TMPro;
 
@@ -14,6 +15,8 @@ public class ManagerScript : MonoBehaviour
     [SerializeField] GameObject LossPanel;
     [SerializeField] ScoreScriptableObject scoreScriptableObject;
 
+    private ScoreSaveFileScript scoreSaveFile;
+
     int score = 0;
     bool stop = false;
     void Start()
@@ -26,8 +29,28 @@ public class ManagerScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        Load();
     }
-    
+
+    private void Save()
+    {
+        scoreSaveFile.killedinf = scoreScriptableObject.killedinf;
+        string path = Application.persistentDataPath + "/score.json";
+        string json = JsonUtility.ToJson(scoreSaveFile);
+        File.WriteAllText(path, json);
+    }
+
+    private void Load()
+    {
+        if(File.Exists(Application.persistentDataPath + "/score.json"))
+        {
+            string path = Application.persistentDataPath + "/score.json";
+            string json = File.ReadAllText(path);
+            scoreSaveFile = JsonUtility.FromJson<ScoreSaveFileScript>(json);
+            scoreScriptableObject.killedinf = scoreSaveFile.killedinf;
+        }
+    }
+
     public void PointsUp()
     {
         score++;
@@ -49,6 +72,7 @@ public class ManagerScript : MonoBehaviour
         }
         highScoreText.text = scoreScriptableObject.killedinf.ToString();
         scoreTextinMenu.text = score.ToString();
+        Save();
         bool stop = true;
     }
 
