@@ -69,10 +69,14 @@ public class ManagerScript : MonoBehaviour
         if(scoreScriptableObject.killedinf < score)
         {
             scoreScriptableObject.killedinf = score;
+            highScoreText.text = scoreScriptableObject.killedinf.ToString();
+            Save();
         }
-        highScoreText.text = scoreScriptableObject.killedinf.ToString();
+        else
+        {
+            highScoreText.text = scoreSaveFile.killedinf.ToString();
+        }
         scoreTextinMenu.text = score.ToString();
-        Save();
         bool stop = true;
     }
 
