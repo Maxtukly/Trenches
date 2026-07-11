@@ -8,7 +8,12 @@ public class MovementScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        EventSystem.custom.testEvent += MoveBack;
+    }
+
+    void MoveBack()
+    {
+        transform.position = new Vector2(transform.position.x - 1, transform.position.y);
     }
 
     // Update is called once per frame

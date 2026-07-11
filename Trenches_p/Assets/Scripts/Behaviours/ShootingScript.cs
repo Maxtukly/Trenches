@@ -51,6 +51,7 @@ public class ShootingScript : MonoBehaviour
     private void AddAmmo()
     {
         currentAmmo = maxAmmo;
+        EventSystem.custom.testEvent.Invoke();
     }
 
     async Task Reload()
