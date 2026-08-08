@@ -7,5 +7,6 @@ public static class EventSystem
     public class CustomEvent
     {
         public UnityAction testEvent;
+        public UnityAction enemyKilled;
     }
 }

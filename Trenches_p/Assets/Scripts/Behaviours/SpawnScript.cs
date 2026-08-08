@@ -6,8 +6,19 @@ public class SpawnScript : MonoBehaviour
 {
     [SerializeField] GameObject EnemyPrefab;
     [SerializeField] float spawnRate = 2f;
+    [SerializeField] float maxSpawnRate = 1;
     float timer = 0f;
     // Update is called once per frame
+    private void Start()
+    {
+        EventSystem.custom.enemyKilled += DecreseCooldown;
+    }
+
+    void DecreseCooldown()
+    {
+        if(spawnRate > maxSpawnRate)
+        spawnRate -= 0.02f;
+    }
     void Update()
     {
         timer += Time.deltaTime;

@@ -8,7 +8,7 @@ public class MovementScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EventSystem.custom.testEvent += MoveBack;
+       //EventSystem.custom.testEvent += MoveBack;
     }
 
     void MoveBack()

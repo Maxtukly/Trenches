@@ -41,6 +41,7 @@ public class ShootingScript : MonoBehaviour
                 AIWalkingScript aIWalkingScript = hit.collider.gameObject.GetComponent<AIWalkingScript>();
                 aIWalkingScript.hit = true;
                 hit.rigidbody.AddForce(dir.normalized * 10, ForceMode2D.Impulse);
+                EventSystem.custom.enemyKilled.Invoke();
                 await Task.Delay(2000);
                 Destroy(hit.collider.gameObject);
             }
@@ -51,7 +52,6 @@ public class ShootingScript : MonoBehaviour
     private void AddAmmo()
     {
         currentAmmo = maxAmmo;
-        EventSystem.custom.testEvent.Invoke();
     }
 
     async Task Reload()
@@ -59,6 +59,7 @@ public class ShootingScript : MonoBehaviour
         await Task.Delay((int)(reloadTime * 1000));
         AddAmmo();
         ammoText.text = currentAmmo.ToString();
+        EventSystem.custom.testEvent.Invoke();
     }
 
     // Update is called once per frame
